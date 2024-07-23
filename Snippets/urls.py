@@ -2,9 +2,10 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from MainApp import views
+2
 
 urlpatterns = [
-    path('', views.index_page),
-    path('snippets/add', views.add_snippet_page),
-    path('snippets/list', views.snippets_page),
+    path('', views.index_page, name="home"),
+    path('snippets/add', views.add_snippet_page, name="snippets-add"),
+    path('snippets/list', views.snippets_page, name="snippets-list"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
