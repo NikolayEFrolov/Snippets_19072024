@@ -1,0 +1,62 @@
+[
+{
+    "model": "MainApp.snippet",
+    "pk": 1,
+    "fields": {
+        "name": "Hello  two world Snippet",
+        "lang": "py",
+        "code": "                                                                        print(\"Hello two world\")\r\n                                \r\n                                ",
+        "creation_date": "2024-07-23T09:50:28.766Z",
+        "user": null,
+        "public": true
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 2,
+    "fields": {
+        "name": "first",
+        "lang": "py",
+        "code": "print('first')",
+        "creation_date": "2024-07-23T11:39:24.898Z",
+        "user": null,
+        "public": true
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 4,
+    "fields": {
+        "name": "Add snipp",
+        "lang": "py",
+        "code": "print(\"Add snipp\")",
+        "creation_date": "2024-07-25T07:19:52.085Z",
+        "user": 1,
+        "public": true
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 5,
+    "fields": {
+        "name": "first public snippet",
+        "lang": "py",
+        "code": "print()",
+        "creation_date": "2024-07-25T08:56:33.999Z",
+        "user": 1,
+        "public": true
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 6,
+    "fields": {
+        "name": "change to public snippet",
+        "lang": "py",
+        "code": "                                    print()\r\n                                ",
+        "creation_date": "2024-07-25T08:57:42.158Z",
+        "user": 1,
+        "public": true
+    }
+}
+]
