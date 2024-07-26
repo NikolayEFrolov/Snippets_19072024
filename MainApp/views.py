@@ -1,4 +1,4 @@
-from django.http import Http404, HttpResponse, HttpResponseNotAllowed, HttpResponseNotFound
+from django.http import Http404, HttpResponseNotAllowed
 from django.shortcuts import render, redirect, get_object_or_404
 from MainApp.models import Snippet
 from django.core.exceptions import ObjectDoesNotExist
@@ -15,10 +15,11 @@ def index_page(request):
 def my_snippets(request):
     snippets = Snippet.objects.filter(user=request.user)
     context = {
-        'pagename': 'Мои сниппеты',
+        'pagename': 'Мои сниппетов',
         'snippets': snippets,
-    }
+        }
     return render(request, 'pages/view_snippets.html', context)
+
 
 @login_required(login_url="home")
 def add_snippet_page(request):
@@ -31,7 +32,7 @@ def add_snippet_page(request):
             }
         return render(request, 'pages/add_snippet.html', context)
     
-    # Получаем данные из формы и на их основе создаем нового пользователя в БД
+    # Получаем данные из формы и на их основе создаем новый Сниппет в БД
     if request.method == "POST":
         form = SnippetForm(request.POST)
         if form.is_valid():
@@ -89,14 +90,15 @@ def snippet_edit(request, snippet_id):
         }
         return render(request, "pages/snippet_detail.html", context)
     
-    # Получаем данных из формы и на их основе обновляем данные сниппета в БД
+    # Получаем данные из формы и на их основе обновляем данные сниппета в БД
     if request.method == "POST":
         data_form = request.POST
         snippet.name = data_form["name"]
         snippet.code = data_form["code"]
-        snippet.public = data_form.get("public", False) # dict, Если есть ключЁ брем (True), ключа если нет возвращаем (False)
+        snippet.public = data_form.get("public", False)
         snippet.save()
         return redirect("snippets-list")
+
 
 @login_required
 def snippet_delete(request, snippet_id):
@@ -107,11 +109,11 @@ def snippet_delete(request, snippet_id):
 
 
 def login(request):
+    from pprint import pprint
     if request.method == 'POST':
         username = request.POST.get("username")
         password = request.POST.get("password")
-        # print("username =", username)
-        # print("password =", password)
+        # print(request.META.get("REMOTE_ADDR")) # Доступ к META информации WSGIRequest(запроса)
         user = auth.authenticate(request, username=username, password=password)
         if user is not None:
             auth.login(request, user)
@@ -137,14 +139,14 @@ def create_user(request):
         context["form"] = form
         return render(request, 'pages/registration.html', context)
     
-    # Получаем данные из формы и на их основе создаем новый Сниппет в БД
+    # Получаем данные из формы и на их основе создаем нового пользователя
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("snippets-list")
+            return redirect("home")  
         context["form"] = form
-        return render(request,'pages/registration.html', {'form': form})
+        return render(request,'pages/registration.html', context)
     
     return HttpResponseNotAllowed(["GET", "POST"])
 
